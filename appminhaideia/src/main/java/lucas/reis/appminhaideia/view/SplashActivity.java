@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.TextView;
 
 import lucas.reis.appminhaideia.R;
+import lucas.reis.appminhaideia.controller.ClienteController;
+import lucas.reis.appminhaideia.core.AppUtil;
 import lucas.reis.appminhaideia.model.Cliente;
 
 public class SplashActivity extends AppCompatActivity {
-    
-    String TAG = "APP_MINHA_IDEIA";
+
+    TextView txtAppVersion;
 
     Cliente objCliente;
+    ClienteController clienteController;
 
     int tempoDeEspera = 1000 * 5;
 
@@ -23,7 +27,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Log.d(TAG, "onCreate: Tela Splash Carregada");
+        Log.d(AppUtil.TAG, "onCreate: Tela Splash Carregada");
+
+        clienteController = new ClienteController();
+
+        txtAppVersion = findViewById(R.id.txtAppVersion);
+        txtAppVersion.setText(AppUtil.versaoDoApp());
 
         trocarTela();
 
@@ -31,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void trocarTela() {
 
-        Log.d(TAG, "trocarTela: Mudando de tela ");
+        Log.d(AppUtil.TAG, "trocarTela: Mudando de tela ");
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -39,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 objCliente = new Cliente("Lucas","teste@teste.com","99009191",28,true);
 
-                Log.d(TAG, "trocarTela: Esperando um tempo ");
+                Log.d(AppUtil.TAG, "trocarTela: Esperando um tempo ");
 
                 Intent trocarDeTela = new Intent(SplashActivity.this, MainActivity.class);
 
