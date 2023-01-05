@@ -8,10 +8,13 @@ import android.os.Handler;
 import android.util.Log;
 
 import lucas.reis.appminhaideia.R;
+import lucas.reis.appminhaideia.model.Cliente;
 
 public class SplashActivity extends AppCompatActivity {
     
     String TAG = "APP_MINHA_IDEIA";
+
+    Cliente objCliente;
 
     int tempoDeEspera = 1000 * 5;
 
@@ -34,9 +37,17 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+                objCliente = new Cliente("Lucas","teste@teste.com","99009191",28,true);
+
                 Log.d(TAG, "trocarTela: Esperando um tempo ");
 
                 Intent trocarDeTela = new Intent(SplashActivity.this, MainActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("nome",objCliente.getNome());
+                bundle.putString("email",objCliente.getEmail());
+
+                trocarDeTela.putExtras(bundle);
                 startActivity(trocarDeTela);
                 finish();
 
